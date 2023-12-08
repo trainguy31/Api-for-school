@@ -1,0 +1,74 @@
+var sprite;
+
+var g  = 1;
+
+var up = "up";
+var down = "down";
+var left = "left";
+var right = "right";
+
+var TIME = 500;
+
+var SPRITE_IMAGE = "https://codehs.com/uploads/b5fa76e730652db36b6768baf0c33c04"
+var NUM_ROW = 5;
+var NUM_COL = 6;
+var centerX = getWidth() / 2;
+var centerY = getHeight() / 2;
+var TILE_WIDTH  = getWidth()/NUM_ROW;
+var TILE_HEIGHT  = getHeight()/NUM_COL;
+//Makes the background
+var BACKGROUND = new Rectangle(getWidth(), getHeight());
+BACKGROUND.setPosition(0,0);
+BACKGROUND.setColor(Color.white);
+add(BACKGROUND);
+//Basic function so i don't have to make a bajillion variables
+function makeLine(x1,y1,x2,y2){
+    var line = new Line(x1,y1,x2,y2);
+    line.setColor(Color.black);
+    add(line);
+}
+//Adds Vertical lines
+for(var i = 0; i < NUM_ROW; i++){
+    makeLine(i * TILE_WIDTH, getHeight(), i * TILE_WIDTH, 0);
+}
+//Adds horizontal lines
+for(var i = 0; i < NUM_COL; i++){
+    makeLine(getWidth(), i * TILE_HEIGHT, 0, i * TILE_HEIGHT);
+}
+var sprite = new WebImage(SPRITE_IMAGE);
+sprite.setSize(TILE_WIDTH,TILE_HEIGHT);
+sprite.setPosition(0,0);
+add(sprite);
+//Everything above is just to create the board.
+
+//Below:main code.
+
+
+
+function start(){
+    setTimeout(moveRight(),1000);
+    setTimeout(moveRight(),2000);
+    setTimeout(moveDown(),3000);
+    setTimeout(moveDown(),4000);
+    setTimeout(moveRight(),5000);
+}
+
+
+
+//Functions/Documentation
+function moveLeft(){
+        sprite.move(-1 * TILE_WIDTH, 0);
+        g++;
+}
+function moveRight(){
+        sprite.move(TILE_WIDTH, 0);
+        g++;
+}
+function moveDown(){
+        sprite.move(0, TILE_HEIGHT);
+        g++;
+}
+function moveUp(){
+        sprite.move(0, -1 * TILE_HEIGHT);
+        g++;
+}
